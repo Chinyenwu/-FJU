@@ -1,0 +1,45 @@
+body{
+  background-image: url("beach.jpg");
+  background-color: #cccccc;
+  height: 97vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+h1{
+  font-family: 微軟正黑體;
+  font-size: 50px;
+  color: white;
+  text-align:center;
+}
+.form{
+	font-family: 微軟正黑體;
+	color: white;
+}
+.result{
+	
+}
+label{
+	display: inline-block;
+	width: 150px;
+	text-align:left;
+}
+.block{
+	width:400px;
+	display:block;
+	margin:5px 0;
+}
+#div1{
+	
+	float:left;
+}
+#div2{
+	float:center;
+}
+#div3{
+	float:right;
+}
+#result{
+	col:white;
+}
