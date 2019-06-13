@@ -8,16 +8,10 @@
 <div id="div1">
 <form  class="form" id="formm" action="javascript:myFunction()">
 	<div class="block">
-    <label>氣壓：</label><input type="number" id="B" min="0" max="2000"  size="4" maxlength="4" class="text2" title="請輸入0~2000" required="required" /></br>
+    <label>月：</label><input type="number" id="mon" min="1" max="12"  size="2" maxlength="2" class="text2" title="請輸入1~12" required="required" /></br>
 	</div>
 	<div class="block">
-    <label>最高氣壓：</label><input type="number" id="D" min="0" max="2000" size="4" maxlength="4" class="text2" title="請輸入0~2000" required="required" /></br>
-	</div>
-	<div class="block">
-    <label>最低氣壓：</label><input type="number" id="F" min="0" max="2000" size="4" maxlength="10" class="text2" title="請輸入0~2000" required="required" /></br>
-	</div>
-	<div class="block">
-    <label>最小相對濕度：</label><input type="number" id="O" min="0" max="100" size="4" maxlength="4" class="text2" title="請輸入0~100" required="required" /></br>
+    <label>日：</label><input type="number"  id="day" min="1" max="31" size="2" maxlength="2" class="text2" title="請輸入1~31" required="required" /></br>
 	</div>
 	<div class="block">
 	<input type="submit" name="submitt" value="submit" />
@@ -25,30 +19,39 @@
 </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script type="text/javascript">
-function myFunction() {					
-	var B = document.getElementById("B").value;		//接收輸入值
-	var D = document.getElementById("D").value;
-	var F = document.getElementById("F").value;
-	var O = document.getElementById("O").value;
-	var b = {{ data.b}};					//接收機器學習計算的值
-	var w1 = {{ data.w1}};
-	var w2 = {{ data.w2}};
-	var w3 = {{ data.w3}};
-	var w4 = {{ data.w4}};
-	var w5 = {{ data.w5}};
-	var w6 = {{ data.w6}};
-	var w7 = {{ data.w7}};
-	document.getElementById("result").innerHTML =  b;
+function myFunction() {
+	var Mon = document.getElementById("mon").value;
+	var Day = document.getElementById("day").value;
+	var inv_yhatPre = {{ dataPre}}
+	var inv_yhatRH = {{ dataRH}}
+	var inv_yhatTM = {{ dataTM}}
+	var inv_yhatWS = {{dataWS}}
+	document.getElementById("date").innerHTML =  Mon+"月"+Day+"日的天氣資料";
+	document.getElementById("resultPre").innerHTML =  inv_yhatPre[Day];
+	document.getElementById("resultRH").innerHTML =  inv_yhatRH[Day]+" %";
+	document.getElementById("resultTM").innerHTML =  inv_yhatTM[Day]+" °C";
+	document.getElementById("resultWS").innerHTML =  inv_yhatWS[Day]+" m/s";
+	//console.log(inv_yhatPre)
+	//console.log(inv_yhatRH)
+	//console.log(inv_yhatTM)
+	//console.log(inv_yhatWS)
 }
 
 </script>
 </div>
-<div id="div2">
-<p id="result">
+<div id="div2" >
+<p id="date">
+</p>
+<p id="resultPre">
+</p>
+<p id="resultRH">
+</p>
+<p id="resultTM">
+</p>
+<p id="resultWS">
 </p>
 </div>
 <div id="div3">
-
 </div>
 </body>
 </html>
