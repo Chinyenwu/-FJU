@@ -8,7 +8,7 @@
 <div id="div1">
 <form  class="form" id="formm" action="javascript:myFunction()">
 	<div class="block">
-    <label>月：</label><input type="number" id="mon" min="1" max="12"  size="2" maxlength="2" class="text2" title="請輸入1~12" required="required" /></br>
+    <label>月：</label><input type="number" id="mon" min="1" max="12"  size="2" maxlength="2" class="text2" title="預設是6月" readonly="readonly" value = "6" /></br>
 	</div>
 	<div class="block">
     <label>日：</label><input type="number"  id="day" min="1" max="31" size="2" maxlength="2" class="text2" title="請輸入1~31" required="required" /></br>
@@ -17,20 +17,22 @@
 	<input type="submit" name="submitt" value="submit" />
 	</div>
 </form>
+<a href="https://e-service.cwb.gov.tw/HistoryDataQuery/index.jsp?fbclid=IwAR2Kp17XZhaiKPGR_Bdf03n_0PwVGNFeKZ-BIgDLeBfzHJYYZbg2T4sk1Jk" target="_blank" title="觀測資料查詢系統" style="color:white;">觀測資料查詢系統 </a>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script type="text/javascript">
 function myFunction() {
 	var Mon = document.getElementById("mon").value;
 	var Day = document.getElementById("day").value;
-	var inv_yhatPre = {{ dataPre}}
 	var inv_yhatRH = {{ dataRH}}
 	var inv_yhatTM = {{ dataTM}}
 	var inv_yhatWS = {{dataWS}}
+	var RH=inv_yhatRH[Day-1].toFixed(2)
+	var TM=inv_yhatTM[Day-1].toFixed(2)
+	var WS=inv_yhatWS[Day-1].toFixed(2)
 	document.getElementById("date").innerHTML =  Mon+"月"+Day+"日的天氣資料";
-	document.getElementById("resultPre").innerHTML =  inv_yhatPre[Day];
-	document.getElementById("resultRH").innerHTML =  inv_yhatRH[Day]+" %";
-	document.getElementById("resultTM").innerHTML =  inv_yhatTM[Day]+" °C";
-	document.getElementById("resultWS").innerHTML =  inv_yhatWS[Day]+" m/s";
+	document.getElementById("resultRH").innerHTML = RH +" %";
+	document.getElementById("resultTM").innerHTML = TM +" °C";
+	document.getElementById("resultWS").innerHTML = WS +" m/s";
 	//console.log(inv_yhatPre)
 	//console.log(inv_yhatRH)
 	//console.log(inv_yhatTM)
@@ -42,8 +44,6 @@ function myFunction() {
 <div id="div2" >
 <p id="date">
 </p>
-<p id="resultPre">
-</p>
 <p id="resultRH">
 </p>
 <p id="resultTM">
@@ -52,6 +52,7 @@ function myFunction() {
 </p>
 </div>
 <div id="div3">
+
 </div>
 </body>
 </html>

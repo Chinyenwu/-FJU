@@ -1,6 +1,4 @@
-from flask import Flask, render_template
-from config import DevConfig
-from flask import json
+from math import sqrt
 from numpy import concatenate
 import numpy as np
 from matplotlib import pyplot
@@ -42,8 +40,8 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
 	return agg
  
 # load dataset
-dataset = read_csv('30天預測/Temperature.csv', header=0, index_col=0)
-testset = read_csv('30天預測/2019-05.csv', header=0, index_col=0)
+dataset = read_csv('Temperature.csv', header=0, index_col=0)
+testset = read_csv('2019-05.csv', header=0, index_col=0)
 values = dataset.values
 testvalues = testset.values
 # ensure all data is float
@@ -110,25 +108,10 @@ print(RH)
 print(WS)
 
 datetime_object = datetime.strptime('2019/06/01','%Y/%m/%d')
-with open('30天預測/pred_weather.csv', 'w', newline='') as csvfile:
+with open('pred_weather.csv', 'w', newline='') as csvfile:
 	writer = csv.writer(csvfile)
 	writer.writerow(['date', 'pred_temperature','pred_RH','pred_WS'])
 	k = 1
 	for i in inv_yhat :
 		writer.writerow([datetime_object,i[-1],i[-2],i[-3]])
 		datetime_object = datetime_object + timedelta(days=1)
-# 路由和處理函式配對
-app = Flask(__name__)
-app.config.from_object(DevConfig)
-@app.route('/')
-def index():	#在這裡傳送資料
-	#dataPre = inv_yhatPre.tolist();
-	dataRH = RH.tolist();
-	dataTM = temperature.tolist();
-	dataWS = WS.tolist();
-	#data = {'inv_yhatPre':inv_yhatPre[0],'inv_yhatRH':inv_yhatRH[0],'inv_yhatTM':inv_yhatTM[0],'inv_yhatWS':inv_yhatWS[0]};
-	return render_template("front.html",dataRH=json.dumps(dataRH),dataTM=json.dumps(dataTM),dataWS=json.dumps(dataWS));
-
-# 判斷自己執行非被當做引入的模組，因為 __name__ 這變數若被當做模組引入使用就不會是 __main__
-if __name__ == '__main__':
-    app.run(port=5000, debug=True, use_reloader=False);
