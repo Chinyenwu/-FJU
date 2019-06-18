@@ -13,9 +13,16 @@ h1{
   color: white;
   text-align:center;
 }
+p{
+	font-family: 微軟正黑體;
+	color:white;
+	font-size: 20px;
+}
+
 .form{
 	font-family: 微軟正黑體;
 	color: white;
+	font-size: 30px;
 }
 .result{
 	
@@ -31,7 +38,6 @@ label{
 	margin:5px 0;
 }
 #div1{
-	
 	float:left;
 }
 #div2{
@@ -39,7 +45,4 @@ label{
 }
 #div3{
 	float:right;
-}
-#result{
-	col:white;
 }
